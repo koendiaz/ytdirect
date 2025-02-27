@@ -4,6 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redireccionando a YouTube</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .message {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .message h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .message p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .message a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
     <script type="text/javascript">
         // Función para detectar si es un dispositivo móvil
         function isMobile() {
@@ -15,14 +48,23 @@
         // Enlace web de YouTube (como respaldo)
         const youtubeWebUrl = "https://www.youtube.com/@acheidemoff";
 
-        // Redirección
+        // Función para intentar abrir la app desde la web
+        function tryOpenApp() {
+            window.location.href = youtubeDeepLink;
+            setTimeout(function() {
+                // Si no se abre la app, muestra un mensaje
+                document.getElementById("web-message").classList.remove("hidden");
+            }, 1000); // Espera 1 segundo antes de mostrar el mensaje
+        }
+
+        // Redirección inicial
         if (isMobile()) {
             // Intenta abrir la aplicación de YouTube
             window.location.href = youtubeDeepLink;
             // Si no se abre la app, redirige a la versión web después de un tiempo
             setTimeout(function() {
                 window.location.href = youtubeWebUrl;
-            }, 1000); // Espera 1 segundo antes de redirigir
+            }, 3000); // Espera 3 segundos antes de redirigir
         } else {
             // Si no es un dispositivo móvil, redirige a la versión web
             window.location.href = youtubeWebUrl;
@@ -30,6 +72,16 @@
     </script>
 </head>
 <body>
-    <p>Estás siendo redirigido a YouTube. Si no funciona, haz clic <a href="https://www.youtube.com/@acheidemoff">aquí</a>.</p>
+    <div class="message" id="initial-message">
+        <h1>Por favor, abre la aplicación de YouTube</h1>
+        <p>Estás siendo redirigido a YouTube. Si la aplicación no se abre automáticamente, haz clic <a href="https://www.youtube.com/@acheidemoff">aquí</a>.</p>
+    </div>
+
+    <div class="message hidden" id="web-message">
+        <h1>¿No se abrió la aplicación?</h1>
+        <p>Parece que la aplicación de YouTube no se abrió. Haz clic en el botón de abajo para intentarlo de nuevo.</p>
+        <button onclick="tryOpenApp()">Abrir aplicación de YouTube</button>
+        <p>Si prefieres continuar en el navegador, haz clic <a href="https://www.youtube.com/@acheidemoff">aquí</a>.</p>
+    </div>
 </body>
 </html>
