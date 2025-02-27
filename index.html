@@ -36,6 +36,11 @@
         .hidden {
             display: none;
         }
+        .instructions {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
     <script type="text/javascript">
         // Función para detectar si es un dispositivo móvil
@@ -79,8 +84,15 @@
 
     <div class="message hidden" id="web-message">
         <h1>¿No se abrió la aplicación?</h1>
-        <p>Parece que la aplicación de YouTube no se abrió. Haz clic en el botón de abajo para intentarlo de nuevo.</p>
-        <button onclick="tryOpenApp()">Abrir aplicación de YouTube</button>
+        <p>Parece que la aplicación de YouTube no se abrió automáticamente. Sigue estos pasos para abrirla manualmente:</p>
+        <div class="instructions">
+            <ol>
+                <li>Toca los tres puntos (<strong>⋮</strong>) en la esquina superior derecha del navegador.</li>
+                <li>Selecciona la opción <strong>"Abrir en la app"</strong>.</li>
+                <li>Confirma la acción si es necesario.</li>
+            </ol>
+        </div>
+        <button onclick="tryOpenApp()">Intentar abrir la aplicación de nuevo</button>
         <p>Si prefieres continuar en el navegador, haz clic <a href="https://www.youtube.com/@acheidemoff">aquí</a>.</p>
     </div>
 </body>
